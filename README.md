@@ -18,7 +18,7 @@ Install the Tailslide npm package with `npm install tailslide`
 
 ### Instantiating and Initializing FlagManager
 
-The `FlagManager`class is the entry point of this SDK. It is responsible for retrieving all the flag rulesets for a given app with its `appId` and creating new `Toggler` instances to handle toggling of feature flags within that app. To instantiate a `FlagManger` object, user must provide the following configuration object:
+The `FlagManager`class is the entry point of this SDK. It is responsible for retrieving all the flag rulesets for a given app with its `appId` and creating new `Toggler` instances to handle toggling of feature flags within that app. To instantiate a `FlagManger` object, a user must provide the following configuration object:
 
 ```javascript
 const FlagManager = require('tailslide’);
@@ -41,17 +41,17 @@ await manager.initialize();
 - `natsStream` is the NATS JetStream’s stream name that stores all the apps and their flag rulesets
 - `appId` is the ID number of the app the user wants to retrieve its flag ruleset from
 - `userContext` is the UUID string that identifies the current user
-- `sdkKey` is the SDK key for the Tailslide, it is used as password for NATS JetStream token authentication
-- `redisHost` is the address to Redis database
-- `redisPort` is the port number that Redis database runs on
+- `sdkKey` is the SDK key for the Tailslide, it is used as a password for NATS JetStream token authentication
+- `redisHost` is the address to the Redis database
+- `redisPort` is the port number that the Redis database runs on
 
-After instantiating a `FlagManager`, the needs to be initialized to asynchronously retrieve the latest, and new ongoing flag ruleset, as well as connecting to Redis database.
+After instantiating a `FlagManager`, the NatsClient and RedisTimeSeriesClient need to be initialized to asynchronously retrieve the latest, and any new flag ruleset data, as well as to connect to the Redis database.
 
 ---
 
 ### Using Feature Flag with Toggler
 
-Once the `FlagManager` is initialized, it can create a `Toggler`, with `newToggler()`, for each feature flag that the developer wants to wrap the new and old features behind. A `Toggler`’s `isFlagActive()` method checks whether the flag with its `flagName` is active or not based on the flag ruleset. If the flag is active, the new feature will be used.
+Once the `FlagManager` is initialized, it can create a `Toggler`, with `newToggler()`, for each feature flag that the developer wants to wrap the new and old features in. A `Toggler`’s `isFlagActive()` method checks whether the flag with its `flagName` is active or not based on the flag ruleset. If the flag is active, the new feature will be used.
 
 ```javascript
   const flagConfig = {
@@ -119,7 +119,7 @@ Creates a new toggler to check for a feature flag's status from the current app'
 
 **Parameters:**
 
-- An object with key of `flagName` and value of a string representing the name of the feature flag for the new toggler to check whether the new feature is enabled
+- An object with key of `flagName` and a string value representing the name of the feature flag for the new toggler to check whether the new feature is enabled
 
 **Return Value:**
 
@@ -129,7 +129,7 @@ Creates a new toggler to check for a feature flag's status from the current app'
 
 ###### `FlagManager.prototype.disconnect()`
 
-Disconnects asynchronously the `FlagManager` instance from NATS JetStream and Redis databse
+Asynchronously disconnects the `FlagManager` instance from NATS JetStream and Redis databse
 
 **Parameters:**
 
@@ -143,7 +143,7 @@ Disconnects asynchronously the `FlagManager` instance from NATS JetStream and Re
 
 ## Toggler
 
-The Toggler class provides methods that determine whether or not new feature code is run and handle success/failure emissions. Each toggler handles one feature flag, and is created by `FlagManager.prototype.newToggler()`.
+The Toggler class provides methods that determine whether or not new feature code is run and handles success/failure emissions. Each toggler handles one feature flag, and is created by `FlagManager.prototype.newToggler()`.
 
 ---
 
@@ -153,9 +153,10 @@ The Toggler class provides methods that determine whether or not new feature cod
 
 Checks for flag status, whitelisted users, and rollout percentage in that order to determine whether the new feature is enabled.
 
-- If the flag is turned false, the function returns `false`
+- If the flag's active status is false, the function returns `false`
 - If current user's uuid is in the whitelist of users, the function returns `true`
 - If current user's uuid hashes to a value within user rollout percentage, the function returns `true`
+- If current user's uuid hasses to a value outside user rollout percentage, the function returns `false`
 
 **Parameters:**
 
@@ -163,7 +164,7 @@ Checks for flag status, whitelisted users, and rollout percentage in that order 
 
 **Return Value**
 
-- `true` or `flase` if feature flag is active
+- `true` or `flase` depending on whether the feature flag is active
 
 ---
 
