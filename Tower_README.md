@@ -565,4 +565,4 @@ Example Response:
 #### GET flags/:flagId/timeseries
 Returns all timeseries data
 
-# Note: Not sure on this one - can we check tmr as a group?
+## Note: Not sure on return value of this one - can we check tmr as a group?
