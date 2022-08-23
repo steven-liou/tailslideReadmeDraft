@@ -55,7 +55,7 @@ Once the `FlagManager` is initialized, it can create a `Toggler`, with the `newT
 
 ```javascript
   const flagConfig = {
-    flagName: ‘App 1 Flag 1’,
+    flagName: 'App 1 Flag 1',
   };
 
   const flagToggler = manager.newToggler(flagConfig);
