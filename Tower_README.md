@@ -573,16 +573,20 @@ Example Response:
 Returns success/failure counts for a specified flag grouped into time buckets within a selected window of time
 
 ```json
-[
-  { timestamp: 1661264546556, success: 137, failure: 4 },
-  { timestamp: 1661264549556, success: 134, failure: 6 },
-  { timestamp: 1661264552556, success: 138, failure: 3 },
-  { timestamp: 1661264555556, success: 136, failure: 5 },
-  { timestamp: 1661264558556, success: 131, failure: 9 },
-  { timestamp: 1661264561556, success: 135, failure: 6 },
-  { timestamp: 1661264564556, success: 130, failure: 10 },
-  { timestamp: 1661264567556, success: 130, failure: 11 },
-  { timestamp: 1661264570556, success: 137, failure: 3 },
-  { timestamp: 1661264573556, success: 132, failure: 9 }
-]
+{
+  "payload": {
+    [
+      { timestamp: 1661264546556, success: 137, failure: 4 },
+      { timestamp: 1661264549556, success: 134, failure: 6 },
+      { timestamp: 1661264552556, success: 138, failure: 3 },
+      { timestamp: 1661264555556, success: 136, failure: 5 },
+      { timestamp: 1661264558556, success: 131, failure: 9 },
+      { timestamp: 1661264561556, success: 135, failure: 6 },
+      { timestamp: 1661264564556, success: 130, failure: 10 },
+      { timestamp: 1661264567556, success: 130, failure: 11 },
+      { timestamp: 1661264570556, success: 137, failure: 3 },
+      { timestamp: 1661264573556, success: 132, failure: 9 }
+    ]
+  }
+}
 ```
