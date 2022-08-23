@@ -576,7 +576,7 @@ Returns success/failure counts for a specified flag grouped into time buckets wi
 {
   "payload": {
     [
-      { timestamp: 1661264546556, success: 137, failure: 4 },
+      { "timestamp": 1661264546556, "success": 137, "failure": 4 },
       { timestamp: 1661264549556, success: 134, failure: 6 },
       { timestamp: 1661264552556, success: 138, failure: 3 },
       { timestamp: 1661264555556, success: 136, failure: 5 },
