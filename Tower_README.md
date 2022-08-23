@@ -34,7 +34,7 @@ REDIS_POLL_RATE=4000
 ## Start NATS Jetstream
 
 Install NATS
-# should we link to the NATS Installation Instructions? https://docs.nats.io/running-a-nats-service/introduction/installation
+https://docs.nats.io/running-a-nats-service/introduction/installation
 From Tower directory in separate terminal run `nats-server -c nats.conf`
 
 *to stop a nats server run `nats-server --signal quit`
@@ -42,14 +42,14 @@ From Tower directory in separate terminal run `nats-server -c nats.conf`
 
 ## Start Redis Time Series Database
 
-# Do we need a command that says 'Install Redis' here? 
-# Should we link to the Redis Installation Instructions? https://redis.io/docs/getting-started/installation/
+Install Redis
+https://redis.io/docs/stack/timeseries/quickstart/
 From any directory in separate terminal run `docker run -p 6379:6379 -it --rm redislabs/redistimeseries`
 
 ## Start PostgreSQL Database
 
 Install PostgreSQL
-# Should we link to the PostgreSQL Installation Instructions? https://www.postgresql.org/download/
+https://www.postgresql.org/download/
 From any directory run `brew services start postgresql`
 
 ## Start Backend
