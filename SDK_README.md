@@ -18,7 +18,7 @@ Install the Tailslide npm package with `npm install tailslide`
 
 ### Instantiating and Initializing FlagManager
 
-The `FlagManager`class is the entry point of this SDK. It is responsible for retrieving all the flag rulesets for a given app with its `appId` and creating new `Toggler` instances to handle toggling of feature flags within that app. To instantiate a `FlagManger` object, a user must provide the following configuration object:
+The `FlagManager`class is the entry point of this SDK. It is responsible for retrieving all the flag rulesets for a given app with its `appId` and creating new `Toggler` instances to handle toggling of feature flags within that app. To instantiate a `FlagManger` object, a user must provide a configuration object:
 
 ```javascript
 const FlagManager = require('tailslide’);
@@ -45,13 +45,13 @@ await manager.initialize();
 - `redisHost` is the address to the Redis database
 - `redisPort` is the port number that the Redis database runs on
 
-After instantiating a `FlagManager`, the NatsClient and RedisTimeSeriesClient need to be initialized to asynchronously retrieve the latest, and any new flag ruleset data, as well as to connect to the Redis database.
+After instantiating a `FlagManager`, invoke the `initialize` method. This method connects the `FlagManager` instance to both NATS JetStream and Redis Timeseries, and asynchronously retrieves the latest and any new flag ruleset data. 
 
 ---
 
 ### Using Feature Flag with Toggler
 
-Once the `FlagManager` is initialized, it can create a `Toggler`, with `newToggler()`, for each feature flag that the developer wants to wrap the new and old features in. A `Toggler`’s `isFlagActive()` method checks whether the flag with its `flagName` is active or not based on the flag ruleset. If the flag is active, the new feature will be used.
+Once the `FlagManager` is initialized, it can create a `Toggler`, with the `newToggler` method, for each feature flag that the developer wants to wrap the new and old features in. A `Toggler`’s `isFlagActive` method checks whether the flag with its `flagName` is active or not based on the flag ruleset. A `Toggler`’s `isFlagActive` method returns a boolean value, which is intended to be used to control branching logic flow within an application at runtime, to invoke new features. 
 
 ```javascript
   const flagConfig = {
@@ -71,7 +71,7 @@ Once the `FlagManager` is initialized, it can create a `Toggler`, with `newToggl
 
 ### Emitting Success or Failture
 
-To use the `Toggler` instances to record successful or failed operations, call its `emitSuccess()` or `emitFailure()` methods:
+To use the `Toggler` instances to record successful or failed operations, call its `emitSuccess` or `emitFailure` methods:
 
 ```javascript
 if (successCondition) {
@@ -94,12 +94,12 @@ The `FlagManager` class is the entry point of the SDK. A new `FlagManager` objec
 **Parameters:**
 
 - An object with the following keys
-  - `server` a string that represents the url and port of the NATS server.
+  - `server` a string that represents the URL and port of the NATS server.
   - `appId` a number representing the application the microservice belongs to
   - `sdkKey` a string generated via the Tower front-end for NATS JetStream authentication
   - `userContext` a string representing the user’s UUID
   - `redisHost` a string that represents the url of the Redis server
-  - `redisPort` a number that represents the port number of the redis server
+  - `redisPort` a number that represents the port number of the Redis server
 
 ---
 
@@ -107,7 +107,7 @@ The `FlagManager` class is the entry point of the SDK. A new `FlagManager` objec
 
 ##### `FlagManager.prototype.userContext`
 
-The uuid string that represents the current active user
+The UUID string that represents the current active user
 
 ---
 
@@ -129,7 +129,7 @@ Creates a new toggler to check for a feature flag's status from the current app'
 
 ###### `FlagManager.prototype.disconnect()`
 
-Asynchronously disconnects the `FlagManager` instance from NATS JetStream and Redis databse
+Asynchronously disconnects the `FlagManager` instance from NATS JetStream and Redis database
 
 **Parameters:**
 
@@ -154,9 +154,9 @@ The Toggler class provides methods that determine whether or not new feature cod
 Checks for flag status, whitelisted users, and rollout percentage in that order to determine whether the new feature is enabled.
 
 - If the flag's active status is false, the function returns `false`
-- If current user's uuid is in the whitelist of users, the function returns `true`
-- If current user's uuid hashes to a value within user rollout percentage, the function returns `true`
-- If current user's uuid hasses to a value outside user rollout percentage, the function returns `false`
+- If current user's UUID is in the whitelist of users, the function returns `true`
+- If current user's UUID hashes to a value within user rollout percentage, the function returns `true`
+- If current user's UUID hashes to a value outside user rollout percentage, the function returns `false`
 
 **Parameters:**
 
@@ -170,7 +170,7 @@ Checks for flag status, whitelisted users, and rollout percentage in that order 
 
 #### `emitSuccess()`
 
-Records a successful operation to the Redis cache, with key `flagId:success` and value of current timestamp
+Records a successful operation to the Redis Timeseries database, with key `flagId:success` and value of current timestamp
 
 **Parameters:**
 
@@ -184,7 +184,7 @@ Records a successful operation to the Redis cache, with key `flagId:success` and
 
 #### `emitFailure()`
 
-Records a failure operation to the Redis cache, with key `flagId:success` and value of current timestamp
+Records a failure operation to the Redis Timeseries database, with key `flagId:success` and value of current timestamp
 
 **Parameters:**
 
