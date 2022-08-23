@@ -5,9 +5,6 @@ To run locally
 Clone main branch of repository
 
 Add .env file into the server directory that contains
-# We might want to consider putting the .env directly into the repository similar to how Pioneer did it
-# I'm not sure if exposing the .env in the README is recommended
-# https://github.com/pioneer-io/pioneer
 
 ```javascript
 PORT=3001 
