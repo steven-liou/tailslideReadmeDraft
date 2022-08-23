@@ -75,7 +75,7 @@ All requests and responses are in json
 
 ### Apps 
 
-#### GET /apps
+#### GET apps
 Returns all apps
 
 Example Response:
@@ -99,7 +99,7 @@ Example Response:
 }
 ```
 
-#### GET /apps/:appId
+#### GET apps/:appId
 Returns the app with a matching `appId`
 
 Example Response:
@@ -181,7 +181,7 @@ Example Response:
 
 ### Flags
 
-#### GET /apps/:appId/flags
+#### GET apps/:appId/flags
 Returns all flags ruleset data belonging to a specific app
 
 Example Response:
@@ -236,7 +236,7 @@ Example Response:
 ```
 
 
-#### GET /flags/:flagId
+#### GET flags/:flagId
 Returns the flag with a matching `flagId` and its ruleset data
 
 Example Response:
@@ -277,7 +277,7 @@ Example Response:
 }
 ```
 
-#### POST /apps/:appId/flags
+#### POST apps/:appId/flags
 Creates a new flag
 
 Successfully creating a flag with `POST` will also create a new log. All flags are initially created in an 'off' toggle state.
