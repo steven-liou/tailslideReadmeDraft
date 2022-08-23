@@ -21,15 +21,15 @@ Install the Tailslide npm package with `npm install tailslide`
 The `FlagManager`class is the entry point of this SDK. It is responsible for retrieving all the flag rulesets for a given app with its `appId` and creating new `Toggler` instances to handle toggling of feature flags within that app. To instantiate a `FlagManger` object, a user must provide a configuration object:
 
 ```javascript
-const FlagManager = require(’tailslide’);
+const FlagManager = require('tailslide');
 
 const config = {
-  natsServer: ‘nats://localhost:4222’,
-  natsStream: ‘flags_ruleset’,
+  natsServer: 'nats://localhost:4222',
+  natsStream: 'flags_ruleset',
   appId: 1,
-  userContext: ‘375d39e6-9c3f-4f58-80bd-e5960b710295‘,
-  sdkKey: ‘myToken’,
-  redisHost: ‘http://localhost’,
+  userContext: '375d39e6-9c3f-4f58-80bd-e5960b710295',
+  sdkKey: 'myToken',
+  redisHost: 'http://localhost',
   redisPort: 6379,
 };
 
