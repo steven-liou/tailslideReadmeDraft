@@ -27,7 +27,7 @@ const config = {
   natsServer: ‘nats://localhost:4222’,
   natsStream: ‘flags_ruleset’,
   appId: 1,
-  userContext: '375d39e6-9c3f-4f58-80bd-e5960b710295',
+  userContext: ‘375d39e6-9c3f-4f58-80bd-e5960b710295‘,
   sdkKey: ‘myToken’,
   redisHost: ‘http://localhost’,
   redisPort: 6379,
