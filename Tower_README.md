@@ -5,6 +5,9 @@ To run locally
 Clone main branch of repository
 
 Add .env file into the server directory that contains
+# We might want to consider putting the .env directly into the repository similar to how Pioneer did it
+# I'm not sure if exposing the .env in the README is recommended
+# https://github.com/pioneer-io/pioneer
 
 ```javascript
 PORT=3001 
@@ -31,21 +34,25 @@ REDIS_POLL_RATE=4000
 ## Start NATS Jetstream
 
 Install NATS
-From tower directory in separate terminal run `nats-server -c nats.conf`
+# should we link to the NATS Installation Instructions? https://docs.nats.io/running-a-nats-service/introduction/installation
+From Tower directory in separate terminal run `nats-server -c nats.conf`
 
-*to stop a nats server run `nats-server --signal quit
-*to delete stream messages run `nats stream purge
+*to stop a nats server run `nats-server --signal quit`
+*to delete stream messages run `nats stream purge`
 
 ## Start Redis Time Series Database
 
+# Do we need a command that says 'Install Redis' here? 
+# Should we link to the Redis Installation Instructions? https://redis.io/docs/getting-started/installation/
 From any directory in separate terminal run `docker run -p 6379:6379 -it --rm redislabs/redistimeseries`
 
 ## Start PostgreSQL Database
 
 Install PostgreSQL
+# Should we link to the PostgreSQL Installation Instructions? https://www.postgresql.org/download/
 From any directory run `brew services start postgresql`
 
-## Start BackEnd
+## Start Backend
 
 From the server directory `npm install`
 
@@ -53,15 +60,15 @@ From the server directory run `npm run dev`
 
 The back-end app is now available at `localhost:3001`
 
-## Start Front-End
+## Start Frontend
 
 From the server directory `npm install`
 
 From the server directory run `npm start`
 
-The front-end app is now available at `localhost:3000`
+The frontend app is now available at `localhost:3000`
 
-## API endpoints implemented on the back-end
+## API endpoints implemented on the backend
 
 All requests and responses are in json
 
@@ -175,7 +182,7 @@ Example Response:
 ### Flags
 
 #### GET /apps/:appId/flags
-Returns all flags belonging to a specific app and their ruleset data
+Returns all flags ruleset data belonging to a specific app
 
 Example Response:
 
@@ -230,7 +237,7 @@ Example Response:
 
 
 #### GET /flags/:flagId
-Returns the flag with a matching `flagId` and it's ruleset data
+Returns the flag with a matching `flagId` and its ruleset data
 
 Example Response:
 
@@ -370,7 +377,7 @@ Example Response:
 ```
 
 #### PATCH flags/:flagId/toggle
-Toggles the "is_active" state of a flag with a matching `flagId` on or off
+Toggles the `is_active` state of a flag with a matching `flagId` on or off
 
 Successfully toggling a flag with `PATCH` will create a new log.
 
@@ -531,7 +538,7 @@ Example Response:
 ### Keys
 
 #### GET keys
-Returns an SDK key
+Returns a SDK key
 
 Example Response:
 
@@ -546,7 +553,7 @@ Example Response:
 ```
 
 #### POST keys
-Creates an SDK key
+Creates a SDK key
 
 Example Response:
 
