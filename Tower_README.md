@@ -34,6 +34,7 @@ REDIS_POLL_RATE=4000
 ## Start NATS Jetstream
 
 Install NATS
+
 https://docs.nats.io/running-a-nats-service/introduction/installation
 From Tower directory in separate terminal run `nats-server -c nats.conf`
 
@@ -43,12 +44,14 @@ From Tower directory in separate terminal run `nats-server -c nats.conf`
 ## Start Redis Time Series Database
 
 Install Redis
+
 https://redis.io/docs/stack/timeseries/quickstart/
 From any directory in separate terminal run `docker run -p 6379:6379 -it --rm redislabs/redistimeseries`
 
 ## Start PostgreSQL Database
 
 Install PostgreSQL
+
 https://www.postgresql.org/download/
 From any directory run `brew services start postgresql`
 
